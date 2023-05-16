@@ -16,11 +16,9 @@ app.use(stockRouter);
 app.use(userRouter);
 
 let staticPath = '../client/public';
-let staticIndexPath = '../client/public/index.html';
 
 if (process.env.NODE_ENV === 'production') {
-  staticPath = '../client/build/static';
-  staticIndexPath = '/../client/build/index.html';
+  staticPath = '../client/build';
 }
 
 app.use(express.static(path.join(__dirname, staticPath)));
@@ -28,7 +26,7 @@ app.use(express.static(path.join(__dirname, staticPath)));
 const server = http.createServer(app);
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, staticIndexPath));
+  res.sendFile(path.join(__dirname, staticPath, 'index.html'));
 });
 
 server.listen(port, () => {
